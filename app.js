@@ -1,21 +1,22 @@
-const toggleBtn = document.querySelector('.dark');
+const darkModeToggle = document.querySelector(".dark img");
 const body = document.body;
-const themeIcon = document.querySelector('.dark img'); 
 
+const darkImg = "images/Dark.png";
+const lightImg = "images/Light.png";
 
-if (localStorage.getItem('theme') === 'light') {
-    body.classList.add('light-mode');
-    themeIcon.src = "img/dark-icon.png";
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  darkModeToggle.src = lightImg;
 }
 
-toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-
-    if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-        themeIcon.src = "img/dark-icon.png";
-    } else {
-        localStorage.setItem('theme', 'dark');
-        themeIcon.src = "img/light-icon.png"; 
-    }
+darkModeToggle.addEventListener("click", () => {
+  if (body.classList.contains("light-mode")) {
+    body.classList.remove("light-mode");
+    darkModeToggle.src = darkImg;
+    localStorage.setItem("theme", "dark");
+  } else {
+    body.classList.add("light-mode");
+    darkModeToggle.src = lightImg;
+    localStorage.setItem("theme", "light");
+  }
 });
