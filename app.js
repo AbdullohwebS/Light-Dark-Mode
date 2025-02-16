@@ -1,22 +1,22 @@
-const darkModeToggle = document.querySelector(".dark img");
-const body = document.body;
+document.addEventListener("DOMContentLoaded", () => {
+  const darkModeToggle = document.querySelector(".dark img");
+  const body = document.body;
 
-const darkImg = "images/Dark.png";
-const lightImg = "images/Light.png";
+  if (!darkModeToggle) return; // Agar tugma mavjud bo'lmasa, kodni bajarish shart emas
 
-if (localStorage.getItem("theme") === "light") {
-  body.classList.add("light-mode");
-  darkModeToggle.src = lightImg;
-}
+  const darkImg = "images/Dark.png";
+  const lightImg = "images/Light.png";
 
-darkModeToggle.addEventListener("click", () => {
-  if (body.classList.contains("light-mode")) {
-    body.classList.remove("light-mode");
-    darkModeToggle.src = darkImg;
-    localStorage.setItem("theme", "dark");
-  } else {
+  // Mahalliy xotirada saqlangan rejimni o'qish
+  if (localStorage.getItem("theme") === "light") {
     body.classList.add("light-mode");
     darkModeToggle.src = lightImg;
-    localStorage.setItem("theme", "light");
   }
+
+  // Tugma bosilganda rejimni almashtirish
+  darkModeToggle.addEventListener("click", () => {
+    const isLightMode = body.classList.toggle("light-mode");
+    darkModeToggle.src = isLightMode ? lightImg : darkImg;
+    localStorage.setItem("theme", isLightMode ? "light" : "dark");
+  });
 });
